@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+
+from carts.models import Cart, CartItem
+from carts.views import _cart_id
 from .forms import RegistrationForm
 from .models import Account
 from django.contrib import messages, auth
@@ -59,6 +62,21 @@ def login(request):
         user = auth.authenticate(email=email, password=password)
 
         if user is not None:
+            try:
+                print('entering inside try block')
+                cart = Cart.objects.get(cart_id=_cart_id(request))
+                is_cart_item_exists = CartItem.objects.filter(cart=cart).exists()
+                print(is_cart_item_exists)
+                if is_cart_item_exists:
+                    cart_item = CartItem.objects.filter(cart=cart)
+                    print(cart_item)
+
+                    for item in cart_item:
+                        item.user = user
+                        item.save()
+            except:
+                print('entering inside except block')
+                pass
             auth.login(request, user)
             messages.success(request, 'Login successful.')
             return redirect('dashboard')
