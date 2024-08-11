@@ -48,19 +48,19 @@ def place_order(request, total=0, quantity=0):
             data.order_note = form.cleaned_data['order_note']
             data.order_total = grand_total
             data.tax = tax
-            data.id = request.META.get('REMOTE_ADDR')
+            data.ip = request.META.get('REMOTE_ADDR')
             data.save()
             # Generate order number
             yr = int(datetime.date.today().strftime('%Y'))
-            dt = int(datetime.date.today().strftime('%d'))
             mt = int(datetime.date.today().strftime('%m'))
+            dt = int(datetime.date.today().strftime('%d'))
             d = datetime.date(yr,mt,dt)
             current_date = d.strftime("%Y%m%d") 
             order_number = current_date + str(data.id)
             data.order_number = order_number
             data.save()
 
-            order = Order.objects.get(user=current_user, is_ordered=False, order_numer=order_number)
+            order = Order.objects.get(user=current_user, is_ordered=False, order_number=order_number)
             context = {
                 'order': order,
                 'cart_items': cart_items,
