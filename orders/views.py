@@ -3,6 +3,7 @@ from django.http import HttpResponse
 
 from carts.models import CartItem
 from orders.models import Order
+from store.models import Product
 from .forms import OrderForm
 from .models import Order, OrderProduct, Payment
 
@@ -50,9 +51,13 @@ def payments(request):
         orderproduct.save()
 
 
-    # Reduce the quantity of the sold products
+        # Reduce the quantity of the sold products
+        product = Product.objects.get(id=item.product_id)
+        product.stock -= item.quantity
+        product.save()
 
     # Clear cart
+    CartItem.objects.filter(user=request.user).delete()
 
     # Send order received email to customer
 
