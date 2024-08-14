@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from carts.models import CartItem
 from orders.models import Order
 from .forms import OrderForm
-from .models import Order, Payment
+from .models import Order, OrderProduct, Payment
 
 import datetime
 import json
@@ -28,6 +28,28 @@ def payments(request):
     order.payment = payment
     order.is_ordered = True
     order.save()
+
+    # Move the cart items to Order Product table
+    cart_items = CartItem.objects.filter(user=request.user)
+
+    for item in cart_items:
+        orderproduct = OrderProduct()
+        orderproduct.order_id = order.id
+        orderproduct.payment = payment
+        orderproduct.user_id = request.user.id
+        orderproduct.product_id = item.product_id
+        orderproduct.quantity = item.quantity
+        orderproduct.product_price = item.product.price
+        orderproduct.ordered = True
+        orderproduct.save()
+
+    # Reduce the quantity of the sold products
+
+    # Clear cart
+
+    # Send order received email to customer
+
+    # Send order number and transaction id back to sendData method via JsonResponse
     return render(request, 'orders/payments.html')
 
 def place_order(request, total=0, quantity=0):
