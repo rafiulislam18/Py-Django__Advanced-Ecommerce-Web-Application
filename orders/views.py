@@ -1,5 +1,7 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 
 from carts.models import CartItem
 from orders.models import Order
@@ -60,6 +62,14 @@ def payments(request):
     CartItem.objects.filter(user=request.user).delete()
 
     # Send order received email to customer
+    mail_subject = 'Thank you for your order!.'
+    message = render_to_string('orders/order_received_email.html', {
+        'user': request.user,
+        'order': order,
+    })
+    to_email = request.user.email
+    send_mail = EmailMessage(mail_subject, message, to=[to_email])
+    send_mail.send()
 
     # Send order number and transaction id back to sendData method via JsonResponse
     return render(request, 'orders/payments.html')
