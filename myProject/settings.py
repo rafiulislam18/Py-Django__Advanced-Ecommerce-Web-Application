@@ -149,7 +149,7 @@ MESSAGE_TAGS = {
 # SMTP Configuration
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'cmmnacrafiulislam0170@gmail.com'
+EMAIL_HOST_USER = ''# email address goes here
 EMAIL_HOST_PASSWORD = ''# email app password goes here
 EMAIL_USE_TLS = True
 
