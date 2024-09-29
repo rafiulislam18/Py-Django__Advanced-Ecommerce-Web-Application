@@ -38,7 +38,12 @@ Core Features (available, more coming-up with the left 30%):
     cd../..
     ```
 
-5. **Run Server:**
+5. **Install requirements:**
+    ```sh
+    pip install -r requirements.txt
+    ```
+
+7. **Run Server:**
     ```sh
     python manage.py runserver
     ```
