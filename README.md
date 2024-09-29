@@ -4,7 +4,7 @@
 
 70% of the project has been finished.
 
-Features (available, more coming-up with the left 30%):
+Core Features (available, more coming-up with the left 30%):
 1. Advanced custom user model with email JWT verification.
 2. Dynamic web pages
 3. Product store with product variations
@@ -41,6 +41,14 @@ Features (available, more coming-up with the left 30%):
 5. **Run Server:**
     ```sh
     python manage.py runserver
+    ```
+
+## Email Host Setup
+1. **Setup host user and password:**
+    modify myProject/settings.py : line-152,153
+    ```python
+    EMAIL_HOST_USER = ''# email address goes here
+    EMAIL_HOST_PASSWORD = ''# email app password goes here
     ```
 
 ## Database Migration
