@@ -16,7 +16,7 @@ Core Features (available, more coming-up with the left 30%):
 
 > Note: You need to have Python installed on your system.
 
-**Open CMD in the project directory and follow the commands below-**
+**Open CMD in the base directory and follow the commands below-**
 
 1. **Setup Virtual Environment:**
     ```sh
