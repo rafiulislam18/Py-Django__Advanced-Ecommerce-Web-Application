@@ -1,4 +1,4 @@
-# Advanced-Django-Ecommerce-Web-Application
+# Advanced Django Ecommerce Web Application
 
 
 
