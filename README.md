@@ -50,7 +50,7 @@ Core Features (available, more coming-up with the left 30%):
 
 ## Email Host Setup
 1. **Setup host user and password:**
-    modify myProject/settings.py : line-152,153
+    Go to myProject/settings.py & search for `EMAIL_HOST_USER` & `EMAIL_HOST_PASSWORD`. Then enter the desired value.
     ```python
     EMAIL_HOST_USER = ''# email address goes here
     EMAIL_HOST_PASSWORD = ''# email app password goes here
